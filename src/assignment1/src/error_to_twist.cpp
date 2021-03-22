@@ -11,7 +11,7 @@ bool calcTwist (
   geometry_msgs::Twist twist;
   double speed = 0.0;
   
-  speed = 0.1 * distance;
+  speed = 0.01 * distance;
 
   twist.linear.x = speed;
   twist.linear.y = 0.0;

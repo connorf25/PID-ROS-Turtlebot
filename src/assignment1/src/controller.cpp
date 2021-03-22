@@ -22,9 +22,15 @@ void Controller::sonarsCallback(const assignment1::Sonars sonars)
     ros::ServiceClient twistClient = n.serviceClient<assignment1::ErrorToTwist>("error_to_twist");
     assignment1::ErrorToTwist twistSrv;
     twistSrv.request.error = errorSrv.response.error;
-    if (twistClient.call(twistSrv)) {
+    if (twistClient.call(twistSrv))
+    {
       ROS_INFO("Speed: %f", twistSrv.response.twist.linear.x);
-    } else {
+      // Publish Twist
+      ros::Publisher twist_pub = n.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
+      twist_pub.publish(twistSrv.response.twist);
+    } 
+    else 
+    {
       ROS_ERROR("Failed to call service ErrorToTwist");
       return;
     }
