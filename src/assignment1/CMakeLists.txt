@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  geometry_msgs
 )
 
 
@@ -23,6 +24,7 @@ add_message_files(
 add_service_files(
   FILES
   SonarsToError.srv
+  ErrorToTwist.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -37,6 +39,7 @@ add_service_files(
 generate_messages(
   DEPENDENCIES
   std_msgs
+  geometry_msgs
 )
 
 
