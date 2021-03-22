@@ -10,17 +10,16 @@ class Controller {
 
 void Controller::sonarsCallback(const assignment1::Sonars sonars)
 {
-  // Not sure if I should add another NodeHandle
-  ros::ServiceClient client = n.serviceClient<assignment1::SonarsToError>("sonars_to_error");
-  assignment1::SonarsToError srv;
-  srv.request.sonars = sonars;
-  if (client.call(srv))
+  ros::ServiceClient errorClient = n.serviceClient<assignment1::SonarsToError>("sonars_to_error");
+  assignment1::SonarsToError errorSrv;
+  errorSrv.request.sonars = sonars;
+  if (errorClient.call(errorSrv))
   {
-    ROS_INFO("Distance: %li, Angle : %li", (long int)srv.response.error.distance, (long int)srv.response.error.angle);
+    ROS_INFO("Distance: %li, Angle : %li", (long int)errorSrv.response.error.distance, (long int)errorSrv.response.error.angle);
   }
   else
   {
-    ROS_ERROR("Failed to call service SonarsToError");
+    ROS_ERROR("Failed to call service/s");
     return;
   }
 }
