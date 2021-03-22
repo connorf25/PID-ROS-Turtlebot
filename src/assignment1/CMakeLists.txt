@@ -65,6 +65,10 @@ add_executable(sonars_to_error src/sonars_to_error.cpp)
 target_link_libraries(sonars_to_error ${catkin_LIBRARIES})
 add_dependencies(sonars_to_error assignment1_gencpp)
 
+add_executable(error_to_twist src/error_to_twist.cpp)
+target_link_libraries(error_to_twist ${catkin_LIBRARIES})
+add_dependencies(error_to_twist assignment1_gencpp)
+
 add_executable(controller src/controller.cpp)
 target_link_libraries(controller ${catkin_LIBRARIES})
 add_dependencies(controller assignment1_gencpp)

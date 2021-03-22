@@ -6,7 +6,6 @@ bool calcError (
   assignment1::SonarsToError::Response &res
 )
 {
-  ROS_INFO("SERVICE RUNNING");
   uint16_t min_dist = std::min({req.sonars.distance0, req.sonars.distance1, req.sonars.distance2});
   int16_t angle;
   if (req.sonars.distance0 == min_dist)
