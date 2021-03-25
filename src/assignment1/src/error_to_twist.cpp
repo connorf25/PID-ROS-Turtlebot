@@ -3,12 +3,12 @@
 #include "geometry_msgs/Twist.h"
 // Derivative variables
 uint16_t prevDistance = 0;
-int16_t prevAngle = 0;
+// int16_t prevAngle = 0;
 
 
 // Integral variables
 uint16_t totalDistance = 0;
-int16_t totalAngle = 0;
+// int16_t totalAngle = 0;
 
 bool isSeen(uint16_t distance) 
 {
@@ -22,12 +22,15 @@ geometry_msgs::Vector3 calcLinear(uint16_t distance)
   double speed;
 
   totalDistance += distance;
-  speed = 0.001 * distance + 0.01 (distance - prevDistance) + 0.001 totalDistance;
+  speed = 0.001 * distance + 0.01 * (distance - prevDistance) + 0.001 * totalDistance;
+  prevDistance = distance;
   if (isSeen(distance)) 
   {
     linear.x = speed;
   }
   else {
+    // Reset integral when out of site
+    totalDistance = 0;
     linear.x = 0.0;
   }
   linear.y = 0.0;
@@ -37,8 +40,11 @@ geometry_msgs::Vector3 calcLinear(uint16_t distance)
 
 geometry_msgs::Vector3 calcAngle(int16_t angle) 
 {
-  double rotation = 0.05 * angle;
   geometry_msgs::Vector3 angular;
+  double rotation;
+
+  rotation = 0.05 * angle;
+
   angular.x = 0.0;
   angular.y = 0.0;
   angular.z = rotation;
