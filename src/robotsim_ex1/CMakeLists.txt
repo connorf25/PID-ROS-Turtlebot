@@ -36,3 +36,7 @@ add_executable(set_target src/set_target.cpp)
 target_link_libraries(set_target ${catkin_LIBRARIES})
 add_dependencies(set_target robotsim_ex1_gencpp)
 
+add_executable(distance_to_target src/distance_to_target.cpp)
+target_link_libraries(distance_to_target ${catkin_LIBRARIES})
+add_dependencies(distance_to_target robotsim_ex1_gencpp)
+

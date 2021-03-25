@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 {
   ros::init(argc, argv, "set_target");
   ros::NodeHandle n;
-  ros::ServiceServer service = n.advertiseService("set_target", distance_to_target);
+  ros::ServiceServer service = n.advertiseService("set_target", random_target);
   ros::spin();
 
   return 0;
