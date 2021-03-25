@@ -14,8 +14,8 @@ void position_callback(const nav_msgs::Odometry odom) {
 int main(int argc, char **argv)
 {
     // Init
+    ros::init(argc, argv, "client");
     ros::NodeHandle n;
-    ros::init(argc, argv, "controller");
     // Subscribe to odom
     ros::Subscriber sub = n.subscribe("odom", 1000, position_callback);
     // Set target
@@ -32,6 +32,10 @@ int main(int argc, char **argv)
     robotsim_ex1::DistanceToTarget distance_to_target_srv;
     ros::Rate loop_rate(1);
     while(ros::ok()) {
+        // Request variables
+        distance_to_target_srv.request.current_position = current_position;
+        distance_to_target_srv.request.target_position = target;
+
         if (distance_to_target.call(distance_to_target_srv)) {
             ROS_INFO("Distance %f", distance_to_target_srv.response.relative_distance);
             ROS_INFO(

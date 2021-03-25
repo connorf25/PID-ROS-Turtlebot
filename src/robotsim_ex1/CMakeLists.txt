@@ -40,3 +40,7 @@ add_executable(distance_to_target src/distance_to_target.cpp)
 target_link_libraries(distance_to_target ${catkin_LIBRARIES})
 add_dependencies(distance_to_target robotsim_ex1_gencpp)
 
+add_executable(client src/client.cpp)
+target_link_libraries(client ${catkin_LIBRARIES})
+add_dependencies(client robotsim_ex1_gencpp)
+
