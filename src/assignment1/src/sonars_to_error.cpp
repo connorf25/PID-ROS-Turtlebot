@@ -10,20 +10,25 @@ bool calcError (
 {
   uint16_t min_dist = std::min({req.sonars.distance0, req.sonars.distance1, req.sonars.distance2});
   int16_t angle;
-  if (req.sonars.distance0 == min_dist)
-  {
-    angle = -30;
-    lastAngle = -30;
-  }
-  else if (req.sonars.distance1 == min_dist) 
-  {
-    angle = 0;
-    lastAngle = 0;
-  }
-  else if (req.sonars.distance2 == min_dist) 
-  {
-    angle = 30;
-    lastAngle = 30;
+  if (min_dist < 65535) { // Can see bowl with sonars
+    if (req.sonars.distance0 == min_dist)
+    {
+      angle = -30;
+      lastAngle = -30;
+    }
+    else if (req.sonars.distance1 == min_dist) 
+    {
+      angle = 0;
+      lastAngle = 0;
+    }
+    else if (req.sonars.distance2 == min_dist) 
+    {
+      angle = 30;
+      lastAngle = 30;
+    }
+    else {
+      ROS_ERROR("This should not be hit");
+    }
   }
   else // Cant see bowl in sonars
   {
