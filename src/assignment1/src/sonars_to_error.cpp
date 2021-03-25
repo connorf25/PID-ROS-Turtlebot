@@ -1,6 +1,8 @@
 #include "ros/ros.h"
 #include "assignment1/SonarsToError.h"
 
+int16_t lastAngle = 0;
+
 bool calcError (
   assignment1::SonarsToError::Request &req,
   assignment1::SonarsToError::Response &res
@@ -11,19 +13,24 @@ bool calcError (
   if (req.sonars.distance0 == min_dist)
   {
     angle = -30;
+    lastAngle = -30;
   }
   else if (req.sonars.distance1 == min_dist) 
   {
     angle = 0;
+    lastAngle = 0;
   }
   else if (req.sonars.distance2 == min_dist) 
   {
     angle = 30;
+    lastAngle = 30;
   }
   else // Cant see bowl in sonars
   {
-      // TODO: Base angle off last seen sonar
-    angle = 60;
+    if (lastAngle > 0)
+      angle = 60;
+    else
+      angle = -60;
   }
   res.error.angle = angle;
   res.error.distance = min_dist;
