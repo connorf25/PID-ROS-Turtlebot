@@ -58,6 +58,7 @@ int main(int argc, char **argv)
   ros::Subscriber sub = controller.n.subscribe("sonars", 1000, &Controller::sonarsCallback, &controller);
   // Calculate twist and publish
   ros::Publisher twist_pub = controller.n.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
+  ros::Rate loop_rate(100);
   while(ros::ok()) {
     // Calculate Twist
     geometry_msgs::Twist twist_command = controller.calcTwist();
@@ -66,6 +67,7 @@ int main(int argc, char **argv)
     // Publish message
     twist_pub.publish(twist_command);
     ros::spinOnce();
+    loop_rate.sleep();
   }
   return 0;
 }
