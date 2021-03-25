@@ -22,7 +22,7 @@ geometry_msgs::Vector3 calcLinear(uint16_t distance)
   double speed;
 
   totalDistance += distance;
-  speed = 0.001 * distance + 0.01 * (distance - prevDistance) + 0.001 * totalDistance;
+  speed = 0.01 * (0.1 * distance + (distance - prevDistance) + 0.001 * totalDistance);
   prevDistance = distance;
   if (isSeen(distance)) 
   {
@@ -43,7 +43,8 @@ geometry_msgs::Vector3 calcAngle(int16_t angle)
   geometry_msgs::Vector3 angular;
   double rotation;
 
-  rotation = 0.05 * angle;
+  // Inverse rotation
+  rotation = -0.05 * angle;
 
   angular.x = 0.0;
   angular.y = 0.0;
