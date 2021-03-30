@@ -8,7 +8,7 @@ int main(int argc, char **argv)
 {
   ros::init(argc, argv, "random_publisher");
   ros::NodeHandle n;
-  ros::Publisher random_pub = n.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
+  ros::Publisher random_pub = n.advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 1000);
   // Low loop rate for smoother input
   ros::Rate loop_rate(1);
 

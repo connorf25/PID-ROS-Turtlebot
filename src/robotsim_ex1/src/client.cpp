@@ -1,5 +1,5 @@
 #include "ros/ros.h"
-#include "nav_msgs/Odometry.h"
+#include "turtlesim/Pose.h"
 #include "geometry_msgs/Point.h"
 #include "geometry_msgs/Vector3.h"
 #include "robotsim_ex1/SetTarget.h"
@@ -7,8 +7,9 @@
 
 geometry_msgs::Point current_position;
 
-void position_callback(const nav_msgs::Odometry odom) {
-    current_position = odom.pose.pose.position;
+void position_callback(const turtlesim::Pose pose) {
+    current_position.x = pose.x;
+    current_position.y = pose.y;
 }
 
 int main(int argc, char **argv)
@@ -16,8 +17,8 @@ int main(int argc, char **argv)
     // Init
     ros::init(argc, argv, "client");
     ros::NodeHandle n;
-    // Subscribe to odom
-    ros::Subscriber sub = n.subscribe("odom", 1000, position_callback);
+    // Subscribe to pose
+    ros::Subscriber sub = n.subscribe("/turtle1/pose", 1000, position_callback);
     // Set target
     geometry_msgs::Vector3 target;
     ros::ServiceClient set_target = n.serviceClient<robotsim_ex1::SetTarget>("set_target");
@@ -39,16 +40,14 @@ int main(int argc, char **argv)
         if (distance_to_target.call(distance_to_target_srv)) {
             ROS_INFO("Distance %f", distance_to_target_srv.response.relative_distance);
             ROS_INFO(
-                "Robot: %f %f %f",
+                "Robot: %f %f",
                 distance_to_target_srv.response.robot_location.x,
-                distance_to_target_srv.response.robot_location.y,
-                distance_to_target_srv.response.robot_location.z
+                distance_to_target_srv.response.robot_location.y
             );
             ROS_INFO(
-                "Target: %f %f %f",
+                "Target: %f %f",
                 distance_to_target_srv.response.target_location.x,
-                distance_to_target_srv.response.target_location.y,
-                distance_to_target_srv.response.target_location.z
+                distance_to_target_srv.response.target_location.y
             );
         } else {
             ROS_ERROR("FAILED TO SET TARGET");

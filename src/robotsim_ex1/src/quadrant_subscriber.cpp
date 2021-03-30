@@ -1,15 +1,14 @@
 #include "ros/ros.h"
 #include "math.h"
-#include "nav_msgs/Odometry.h"
-#include "geometry_msgs/Point.h"
+#include "turtlesim/Pose.h"
 
-void quadrant_callback(const nav_msgs::Odometry odom)
+void quadrant_callback(const turtlesim::Pose pose)
 {
-  // Take point from odom publisher
-  geometry_msgs::Point point = odom.pose.pose.position;
+  // Take point from pose publisher
   double x, y, angle;
-  x = point.x;
-  y = point.y;
+  // Subtract 5 to make starting position origin
+  x = pose.x - 5.44444;
+  y = pose.y - 5.44444;
   // Calculate angle
   angle = atan2(y, x) * 180 / M_PI;
   // Correction if angle is < 0 and goes negative
@@ -42,7 +41,7 @@ int main(int argc, char **argv)
 {
   ros::init(argc, argv, "quadrant_subscriber");
   ros::NodeHandle n;
-  ros::Subscriber sub = n.subscribe("odom", 1000, quadrant_callback);
+  ros::Subscriber sub = n.subscribe("/turtle1/pose", 1000, quadrant_callback);
   ros::spin();
 
   return 0;
