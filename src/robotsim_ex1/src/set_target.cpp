@@ -1,6 +1,8 @@
 #include "ros/ros.h"
 #include "geometry_msgs/Vector3.h"
 #include "robotsim_ex1/SetTarget.h"
+#include <stdlib.h>
+#include <time.h> 
 
 bool random_target(
     robotsim_ex1::SetTarget::Request &req,
@@ -17,6 +19,8 @@ bool random_target(
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "set_target");
+  // Random seed
+  srand (time(NULL));
   ros::NodeHandle n;
   ros::ServiceServer service = n.advertiseService("set_target", random_target);
   ros::spin();
