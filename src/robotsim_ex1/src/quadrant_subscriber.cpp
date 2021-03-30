@@ -4,7 +4,7 @@
 
 void quadrant_callback(const turtlesim::Pose pose)
 {
-  // Take point from pose publisher
+  // Take position from pose publisher
   double x, y, angle;
   // Subtract 5 to make starting position origin
   x = pose.x - 5.44444;

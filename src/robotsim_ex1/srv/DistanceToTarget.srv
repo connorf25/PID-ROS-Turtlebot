@@ -1,4 +1,4 @@
-geometry_msgs/Point current_position
+geometry_msgs/Vector3 current_position
 geometry_msgs/Vector3 target_position
 ---
 float64 relative_distance

@@ -1,11 +1,10 @@
 #include "ros/ros.h"
 #include "turtlesim/Pose.h"
-#include "geometry_msgs/Point.h"
 #include "geometry_msgs/Vector3.h"
 #include "robotsim_ex1/SetTarget.h"
 #include "robotsim_ex1/DistanceToTarget.h"
 
-geometry_msgs::Point current_position;
+geometry_msgs::Vector3 current_position;
 
 void position_callback(const turtlesim::Pose pose) {
     current_position.x = pose.x;
