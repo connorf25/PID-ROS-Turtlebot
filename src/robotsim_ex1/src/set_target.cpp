@@ -10,7 +10,6 @@ bool random_target(
     geometry_msgs::Vector3 target;
     target.x = rand() % 10;
     target.y = rand() % 10;
-    target.z = rand() % 10;
     res.target_location = target;
     return true;
 }

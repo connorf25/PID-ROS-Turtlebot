@@ -13,7 +13,6 @@ bool distance_to_target(
     double distance;
     position.x = req.current_position.x;
     position.y = req.current_position.y;
-    position.z = req.current_position.z;
     distance = sqrt(pow((target.x - position.x), 2) + pow((target.y - position.y), 2));
 
     res.relative_distance = distance;
