@@ -72,3 +72,7 @@ add_dependencies(error_to_twist assignment1_gencpp)
 add_executable(controller src/controller.cpp)
 target_link_libraries(controller ${catkin_LIBRARIES})
 add_dependencies(controller assignment1_gencpp)
+
+add_executable(calc_variance src/calc_variance.cpp)
+target_link_libraries(calc_variance ${catkin_LIBRARIES})
+add_dependencies(calc_variance assignment1_gencpp)
