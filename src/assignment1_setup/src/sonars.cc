@@ -14,6 +14,7 @@
 #include <random>
 #include <stdint.h>
 #include <iostream>
+#include <algorithm>
 
 bool isSeen(double angle) {
     return angle <= 45.0 && angle >= -45.0;
@@ -66,7 +67,7 @@ int main(int argc, char **argv) {
        }
        double x = srv.response.pose.position.x;
        double y = srv.response.pose.position.y;
-       double angle = atan2(y, x) * 180.0 / M_PI;
+       double angle = atan2(y, x) / 3.1415926536 * 180.0;
        assignment1_setup::Sonars msg;
        if (!isSeen(angle)) {
            msg = setMsg(UINT16_MAX, UINT16_MAX, UINT16_MAX);
@@ -79,7 +80,7 @@ int main(int argc, char **argv) {
 #else
        double centimetres = sqrt(x * x + y * y) * 100.0;
 #endif
-       uint16_t distance = static_cast<uint16_t>(centimetres);
+       uint16_t distance = static_cast<uint16_t>(std::min(std::max(centimetres, 0.0), 65535.0));
        if (isZero(angle)) {
            msg = setMsg(distance, UINT16_MAX, UINT16_MAX);
        }
