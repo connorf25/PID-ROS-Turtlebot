@@ -25,6 +25,7 @@ add_service_files(
   FILES
   GetError.srv
   ErrorToTwist.srv
+  KalmanFilter.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -76,3 +77,7 @@ add_dependencies(controller assignment1_gencpp)
 add_executable(calc_variance src/calc_variance.cpp)
 target_link_libraries(calc_variance ${catkin_LIBRARIES})
 add_dependencies(calc_variance assignment1_gencpp)
+
+add_executable(kalman_filter src/kalman_filter.cpp)
+target_link_libraries(kalman_filter ${catkin_LIBRARIES})
+add_dependencies(kalman_filter assignment1_gencpp)
