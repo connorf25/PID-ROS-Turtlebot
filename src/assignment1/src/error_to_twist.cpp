@@ -1,14 +1,15 @@
 #include "ros/ros.h"
 #include "assignment1/ErrorToTwist.h"
 #include "geometry_msgs/Twist.h"
+
+// Change of Time
+// Delta T is 1/loop_rate
+double deltaT = 1.0/100.0; 
+
 // Derivative variables
 uint16_t prevDistance = 0;
-// int16_t prevAngle = 0;
-
-
 // Integral variables
-uint16_t totalDistance = 0;
-// int16_t totalAngle = 0;
+double integralDistance = 0.0;
 
 bool isSeen(uint16_t distance) 
 {
@@ -19,18 +20,22 @@ bool isSeen(uint16_t distance)
 geometry_msgs::Vector3 calcLinear(uint16_t distance) 
 {
   geometry_msgs::Vector3 linear;
-  double speed;
+  double speed, p, i, d;
 
-  totalDistance += distance;
-  speed = 0.01 * (0.1 * distance + (distance - prevDistance) + 0.001 * totalDistance);
+  integralDistance += (distance * deltaT);
+  p = 0.5 * distance;
+  i = 0.01 * integralDistance;
+  d = 1.0 * (distance - prevDistance) / deltaT;
+  speed = 0.01 * (p + i + d);
+  ROS_INFO("%lf", speed);
   prevDistance = distance;
   if (isSeen(distance)) 
   {
-    linear.x = speed;
+    linear.x = std::min(speed, 0.22);
   }
   else {
-    // Reset integral when out of site
-    totalDistance = 0;
+    // Reset integral and stop moving when bowl out of sight
+    integralDistance = 0;
     linear.x = 0.0;
   }
   linear.y = 0.0;
@@ -43,8 +48,8 @@ geometry_msgs::Vector3 calcAngle(int16_t angle)
   geometry_msgs::Vector3 angular;
   double rotation;
 
-  // Inverse rotation
-  rotation = -0.05 * angle;
+  // Inverse rotation and calculate as proportional
+  rotation = std::min(-0.05 * angle, 2.84);
 
   angular.x = 0.0;
   angular.y = 0.0;

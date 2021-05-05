@@ -62,8 +62,6 @@ int main(int argc, char **argv)
   while(ros::ok()) {
     // Calculate Twist
     geometry_msgs::Twist twist_command = controller.calcTwist();
-    ROS_INFO("Speed: %f %f %f", twist_command.linear.x, twist_command.linear.y, twist_command.linear.z);
-    ROS_INFO("Angle: %f %f %f", twist_command.angular.x, twist_command.angular.y, twist_command.angular.z);
     // Publish message
     twist_pub.publish(twist_command);
     ros::spinOnce();
