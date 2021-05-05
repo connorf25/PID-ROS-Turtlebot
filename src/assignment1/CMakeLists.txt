@@ -23,7 +23,7 @@ add_message_files(
 # Generate services in the 'srv' folder
 add_service_files(
   FILES
-  SonarsToError.srv
+  GetError.srv
   ErrorToTwist.srv
 )
 
@@ -61,9 +61,9 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(sonars_to_error src/sonars_to_error.cpp)
-target_link_libraries(sonars_to_error ${catkin_LIBRARIES})
-add_dependencies(sonars_to_error assignment1_gencpp)
+add_executable(get_error src/get_error.cpp)
+target_link_libraries(get_error ${catkin_LIBRARIES})
+add_dependencies(get_error assignment1_gencpp)
 
 add_executable(error_to_twist src/error_to_twist.cpp)
 target_link_libraries(error_to_twist ${catkin_LIBRARIES})

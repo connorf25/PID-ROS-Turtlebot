@@ -1,6 +1,6 @@
 <launch>
     <node pkg="assignment1_setup"  type="sonars" name="sonars" respawn="true" />
-    <node pkg="assignment1"  type="sonars_to_error" name="sonars_to_error" respawn="true" />
+    <node pkg="assignment1"  type="get_error" name="get_error" respawn="true" />
     <node pkg="assignment1"  type="error_to_twist" name="error_to_twist" respawn="true" />
     <node pkg="assignment1"  type="controller" name="controller" respawn="true" />
 </launch>
