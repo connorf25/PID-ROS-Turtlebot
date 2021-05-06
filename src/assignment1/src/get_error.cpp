@@ -15,6 +15,7 @@ bool calcError (
   assignment1::GetError::Response &res
 )
 {
+  ROS_INFO("Sonars: %d, %d, %d", lastReading.distance0, lastReading.distance1, lastReading.distance2);
   uint16_t min_dist = std::min({lastReading.distance0, lastReading.distance1, lastReading.distance2});
   int16_t angle;
   if (min_dist < 65535) { // Can see bowl with sonars

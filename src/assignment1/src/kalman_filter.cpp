@@ -11,13 +11,14 @@ double y = 0;
 bool initialize = true; // Boolean to store if this is first loop
 
 double euclideanDistance(geometry_msgs::Point prev, geometry_msgs::Point current) {
-    return sqrt(pow(prev.x - current.x, 2) + pow(prev.y - current.y, 2));
+    return sqrt(pow(prev.x - current.x, 2) + pow(prev.y - current.y, 2)) * 100;
 }
 
 geometry_msgs::Point getPosition() {
     ros::NodeHandle n;
     gazebo_msgs::GetModelState srv;
     ros::ServiceClient locations = n.serviceClient<gazebo_msgs::GetModelState>("/gazebo/get_model_state");
+    srv.request.model_name = "turtlebot3_burger";
     if (!locations.call(srv)) {
         ROS_ERROR("Failed to query model state. Is gazebo running?");
     }
@@ -51,6 +52,7 @@ bool estimateDistance (
 
     prev_position = current_position;
     res.distance = y;
+    ROS_INFO("%d, %d", z, y);
     return true;
 }
 
