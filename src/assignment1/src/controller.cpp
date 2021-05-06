@@ -4,7 +4,6 @@
 #include "assignment1/ErrorToTwist.h"
 #include "assignment1/GetError.h"
 #include "assignment1/KalmanFilter.h"
-#include "stdio.h"
 
 class Controller {
   public:
@@ -36,8 +35,6 @@ assignment1::Error Controller::call_get_error() {
       else {
         ROS_ERROR("Failed to call service KalmanFilter");
       }
-      // ROS_INFO("%d", error.distance);
-      std::cout << errorSrv.response.error.distance << " " << error.distance << std::endl;
     }
     // #endif
     return error;
