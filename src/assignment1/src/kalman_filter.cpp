@@ -4,7 +4,7 @@
 #include "gazebo_msgs/GetModelState.h"
 
 geometry_msgs::Point prev_position, current_position;
-double p = 100; // This is arbitarily set as positional data should have no variance
+double p = 50; // This is arbitarily set as positional data should have no variance
 double r = 10000; // Experimentally determined that the sonar variance is ~10000
 double k = p / (p + r); // This k value will always stay constant
 double y = 0;
@@ -45,7 +45,7 @@ bool estimateDistance (
     p = p; // This will be the same each step as value is being read from gazebo
 
     // Correction
-    k = p / (p + r);
+    k = p / (p + r); // k will remain constant as p and r are fixed
     y = y + k * (z - y);
     // p = (1 - k) * p; // This line is not used as the p value is constant
 

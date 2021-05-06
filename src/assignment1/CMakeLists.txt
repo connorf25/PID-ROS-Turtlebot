@@ -74,6 +74,11 @@ add_executable(controller src/controller.cpp)
 target_link_libraries(controller ${catkin_LIBRARIES})
 add_dependencies(controller assignment1_gencpp)
 
+add_executable(noisy_controller src/controller.cpp)
+target_compile_definitions(noisy_controller PUBLIC -DNOISY_SONAR)
+target_link_libraries(noisy_controller ${catkin_LIBRARIES})
+add_dependencies(noisy_controller assignment1_gencpp)
+
 add_executable(calc_variance src/calc_variance.cpp)
 target_link_libraries(calc_variance ${catkin_LIBRARIES})
 add_dependencies(calc_variance assignment1_gencpp)

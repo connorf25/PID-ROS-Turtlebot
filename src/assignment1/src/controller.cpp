@@ -23,7 +23,7 @@ assignment1::Error Controller::call_get_error() {
   {
     error = errorSrv.response.error;
     // Kalman filter sonar distance if required
-    // #ifdef NOISY_SONAR
+    #ifdef NOISY_SONAR
     if (error.distance < 65535) {
       ros::ServiceClient kalmanClient = n.serviceClient<assignment1::KalmanFilter>("kalman_filter");
       assignment1::KalmanFilter kalmanSrv;
@@ -36,7 +36,7 @@ assignment1::Error Controller::call_get_error() {
         ROS_ERROR("Failed to call service KalmanFilter");
       }
     }
-    // #endif
+    #endif
     return error;
   }
   else

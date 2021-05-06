@@ -1,0 +1,7 @@
+<launch>
+    <!-- <node pkg="assignment1_setup"  type="noisy_sonars" name="noisy_sonars" respawn="true" /> -->
+    <node pkg="assignment1"  type="get_error" name="get_error" respawn="true" />
+    <node pkg="assignment1"  type="error_to_twist" name="error_to_twist" respawn="true" />
+    <node pkg="assignment1"  type="kalman_filter" name="kalman_filter" respawn="true" />
+    <node pkg="assignment1"  type="noisy_controller" name="noisy_controller" respawn="true" />
+</launch>
