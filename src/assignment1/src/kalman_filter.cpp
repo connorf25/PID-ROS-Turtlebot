@@ -3,8 +3,9 @@
 
 double k = 0;
 double p = 0;
-double r = 10000;
+double r = 100;
 double y = 0;
+bool initialize = true;
 
 bool estimateDistance (
     assignment1::KalmanFilter::Request &req,
@@ -12,7 +13,8 @@ bool estimateDistance (
 )
 {
     double z = req.distance;
-    if (y == 0 && p == 0) {
+    if (initialize) {
+        initialize = false;
         y = z;
         p = r;
     }
