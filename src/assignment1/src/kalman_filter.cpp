@@ -51,8 +51,9 @@ bool estimateDistance (
     // p = (1 - k) * p; // This line is not used as the p value is constant
 
     prev_position = current_position;
-    res.distance = y;
-    ROS_INFO("%d, %d", z, y);
+    uint16_t distance = static_cast<uint16_t>(y);
+    ROS_INFO("Filtered distance: %d", distance);
+    res.distance = distance;
     return true;
 }
 
