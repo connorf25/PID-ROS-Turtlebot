@@ -4,7 +4,7 @@
 #include "gazebo_msgs/GetModelState.h"
 
 geometry_msgs::Point prev_position, current_position;
-double p = 50; // This is arbitarily set as positional data should have no variance
+double p = 50; // This is arbitrarily set as positional data should have no variance
 double r = 10000; // Experimentally determined that the sonar variance is ~10000
 double k = p / (p + r); // This k value will always stay constant
 double y = 0;
