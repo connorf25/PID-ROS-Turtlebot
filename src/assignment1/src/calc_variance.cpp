@@ -1,6 +1,6 @@
 #include "ros/ros.h"
 #include "assignment1/Sonars.h"
-#include "stdio.h"
+// #include "stdio.h"
 
 double m = 0;
 double s = 0;
@@ -8,7 +8,6 @@ uint32_t k = 0;
 
 void runningVariance(const assignment1::Sonars sonars)
 {
-    // Running variance as documented here https://www.johndcook.com/blog/standard_deviation/
     k += 1;
     uint16_t x = std::min({sonars.distance0, sonars.distance1, sonars.distance2});
 
@@ -22,9 +21,10 @@ void runningVariance(const assignment1::Sonars sonars)
         m = prevM + (x - prevM) / k;
         s = s + (x - prevM) * (x - m);
         double variance = s / (k - 1);
-        // ROS_INFO("Variance: %f", variance);
-        // ROS_INFO("Standard Deviation: %f", sqrt(variance));
-        std::cout << x << std::endl;
+        ROS_INFO("Variance: %f", variance);
+        ROS_INFO("Standard Deviation: %f", sqrt(variance));
+        // Used for calculating variance by hand
+        // std::cout << x << std::endl;
     }
 }
 
